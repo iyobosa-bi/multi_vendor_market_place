@@ -8,26 +8,32 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-        public function index()
-        {
-            $user = Auth::user();
+    public function index()
+    {
+        $user = Auth::user();
 
-            return view('auth.frontend.profile.index', compact('user'));
-        }
+        return view('auth.frontend.profile.index', compact('user'));
+    }
 
-        public function update(ProfileUpdateRequest $request)
-        {
-            $validated = $request->validated();
-            $user = Auth::user();
+    public function update(ProfileUpdateRequest $request)
+    {
+        $validated = $request->validated();
+        $user = Auth::user();
 
-            if ($request->hasFile('avatar')) {
-                $avatarPath = $request->file('avatar')->store('avatars', 'public');
-                $validated['avatar'] = Storage::url($avatarPath);
+        if ($request->hasFile('avatar')) {
+
+            //delete existing file
+            if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+                Storage::disk('public')->delete($user->avatar);
             }
 
-            $user->fill($validated);
-            $user->save();
+            $avatarPath = $request->file('avatar')->store('avatars', 'public');
+            // $validated['avatar'] = Storage::url($avatarPath);
+            $validated['avatar'] = $avatarPath;
 
-            return redirect()->route('profile')->with('status', 'Profile updated successfully.');
         }
+        $user->update($validated);
+
+        return redirect()->route('profile')->with('status', 'Profile updated successfully.');
+    }
 }

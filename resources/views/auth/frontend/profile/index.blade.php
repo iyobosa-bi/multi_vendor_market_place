@@ -14,15 +14,14 @@
                                 <div class="avatar-edit">
                                     <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg">
                                     <label for="imageUpload">
-                                        <img src="assets/images/icons/camera.svg" alt="">
+                                        <img src="{{ asset($user->avatar) }}" alt="">
                                     </label>
                                 </div>
                                 <div class="avatar-preview">
-                                    <div id="imagePreview">
+                                    <div id="">
                                     </div>
                                 </div>
                             </div>
-
                             <h5 class="profile-info__name mb-1">{{ $user->name }}</h5>
                             <span class="profile-info__designation font-14">Exclusive Author</span>
                         </div>
@@ -33,7 +32,7 @@
                                     <i class="ti ti-user"></i>
                                     <span class="text text-heading fw-500">Username</span>
                                 </span>
-                                <span class="profile-info-list__info">{{ $user->username }}</span>
+                                <span class="profile-info-list__info">{{ $user->name }}</span>
                             </li>
                             <li class="profile-info-list__item">
                                 <span class="profile-info-list__content flx-align flex-nowrap gap-2">
@@ -105,15 +104,15 @@
                                 </li>
                             </ul>
                         </div>
-                        
+
                         <div class="profile-info-content">
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade active show" id="pills-personalInfo" role="tabpanel"
                                     aria-labelledby="pills-personalInfo-tab" tabindex="0">
-                                   
+
                                     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                                         @csrf
-                                        
+
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-6">
                                                 <div class="form_box">
