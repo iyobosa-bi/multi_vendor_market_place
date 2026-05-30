@@ -14,7 +14,7 @@
                                 <div class="avatar-edit">
                                     <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg">
                                     <label for="imageUpload">
-                                        <img src="{{ asset($user->avatar) }}" alt="">
+                                        <img src="{{ asset('storage/'.$user->avatar) }}" alt="">
                                     </label>
                                 </div>
                                 <div class="avatar-preview">
