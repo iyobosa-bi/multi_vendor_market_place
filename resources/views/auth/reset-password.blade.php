@@ -12,7 +12,7 @@
                     <div class="col-lg-12">
                         <div class="breadcrumb-two-content text-center">
 
-                            <ul class="breadcrumb-list flx-align gap-2 mb-2 justify-content-center">
+                            <ul class="breadcrumb-list flex-align gap-2 mb-2 justify-content-center">
                                 <li class="breadcrumb-list__item font-14 text-body">
                                     <a href="index.html" class="breadcrumb-list__link text-body hover-text-main">Home</a>
                                 </li>
