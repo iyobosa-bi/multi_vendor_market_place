@@ -13,8 +13,18 @@ return new class extends Migration {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('avatar')->nullable()->default('https://ui-avatars.com/api/?name=John+Doe&size=128');
+            $table->decimal('balance', 15, 2)->default(0);
+            $table->integer('total_sales')->default(0);
+            $table->foreignId('level_id')->nullable();
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
+            $table->string('address')->nullable();
+            $table->boolean('kyc_status')->default(0);
+            $table->foreignId('withdraw_method_id')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->enum('user_type', ['user', 'author'])->default('user');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -32,7 +42,7 @@ return new class extends Migration {
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
             $table->longText('payload');
-            $table->integer('last_activity')->index();
+            $table->unsignedBigInteger('last_activity')->index();
         });
     }
 

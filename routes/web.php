@@ -18,6 +18,7 @@ Route::middleware(['auth','verified'])->group(function () {
 
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
     Route::get('/profile',[ProfileController::class,'index'])->name('profile');
+    Route::post('/profile',[ProfileController::class,'update'])->name('profile.update');
 
 });
 

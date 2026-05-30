@@ -105,47 +105,30 @@
                                 </li>
                             </ul>
                         </div>
-
+                        
                         <div class="profile-info-content">
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade active show" id="pills-personalInfo" role="tabpanel"
                                     aria-labelledby="pills-personalInfo-tab" tabindex="0">
-                                    <form action="#" autocomplete="off">
+                                   
+                                    <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                        @csrf
+                                        
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-6">
                                                 <div class="form_box">
-                                                    <label for="fName"
-                                                        class="form-label mb-2 font-18 font-heading fw-600">First
-                                                        Name</label>
-                                                    <input type="text" class="common-input border" id="fName"
-                                                        value="Michel" placeholder="First Name">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-xs-6">
-                                                <div class="form_box">
-                                                    <label for="lastNamee"
-                                                        class="form-label mb-2 font-18 font-heading fw-600">Last
-                                                        Name</label>
-                                                    <input type="text" class="common-input border" id="lastNamee"
-                                                        value="Smith" placeholder="Last Name">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-xs-6">
-                                                <div class="form_box">
-                                                    <label for="phonee"
-                                                        class="form-label mb-2 font-18 font-heading fw-600">Phone
-                                                        Number</label>
-                                                    <input type="tel" class="common-input border" id="phonee"
-                                                        value="+880 15589 236 45" placeholder="Phone Number">
+                                                    <label for="name"
+                                                        class="form-label mb-2 font-18 font-heading fw-600">Full Name</label>
+                                                    <input type="text" class="common-input border" id="name" name="name"
+                                                        value="{{ old('name', $user->name) }}" placeholder="Full Name">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 col-xs-6">
                                                 <div class="form_box">
                                                     <label for="emailAdddd"
-                                                        class="form-label mb-2 font-18 font-heading fw-600">Email
-                                                        Address</label>
-                                                    <input type="email" class="common-input border" id="emailAdddd"
-                                                        value="michel15@gmail.com" placeholder="Email Address">
+                                                        class="form-label mb-2 font-18 font-heading fw-600">Email Address</label>
+                                                    <input type="email" class="common-input border" id="emailAdddd" name="email"
+                                                        value="{{ old('email', $user->email) }}" placeholder="Email Address">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 col-xs-6">
@@ -153,34 +136,21 @@
                                                     <label for="cityyy"
                                                         class="form-label mb-2 font-18 font-heading fw-600">City</label>
                                                     <div class="select-has-icon">
-                                                        <select class="common-input border" id="cityyy">
-                                                            <option value="1">Dhaka</option>
-                                                            <option value="1">Chandpur</option>
-                                                            <option value="1">Comilla</option>
-                                                            <option value="1">Rangpur</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-xs-6">
-                                                <div class="form_box"> <label for="Stateee"
-                                                        class="form-label mb-2 font-18 font-heading fw-600">State/Region</label>
-                                                    <div class="select-has-icon">
-                                                        <select class="common-input border" id="Stateee">
-                                                            <option value="1">USA</option>
-                                                            <option value="1">Bangladesh</option>
-                                                            <option value="1">India</option>
-                                                            <option value="1">Pakistan</option>
+                                                        <select class="common-input border" id="cityyy" name="city">
+                                                            <option value="">Select City</option>
+                                                            <option value="Dhaka" {{ old('city', $user->city) == 'Dhaka' ? 'selected' : '' }}>Dhaka</option>
+                                                            <option value="Chandpur" {{ old('city', $user->city) == 'Chandpur' ? 'selected' : '' }}>Chandpur</option>
+                                                            <option value="Comilla" {{ old('city', $user->city) == 'Comilla' ? 'selected' : '' }}>Comilla</option>
+                                                            <option value="Rangpur" {{ old('city', $user->city) == 'Rangpur' ? 'selected' : '' }}>Rangpur</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 col-xs-6">
                                                 <div class="form_box">
-                                                    <label for="Postcodeee"
-                                                        class="form-label mb-2 font-18 font-heading fw-600">Postcode</label>
-                                                    <input type="text" class="common-input border" id="Postcodeee"
-                                                        value="1219" placeholder="Post Code">
+                                                    <label for="avatar"
+                                                        class="form-label mb-2 font-18 font-heading fw-600">Avatar</label>
+                                                    <input type="file" class="" id="avatar" name="avatar" accept=".png, .jpg, .jpeg">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 col-xs-6">
@@ -188,19 +158,26 @@
                                                     <label for="Countryyy"
                                                         class="form-label mb-2 font-18 font-heading fw-600">Country</label>
                                                     <div class="select-has-icon">
-                                                        <select class="common-input border" id="Countryyy">
-                                                            <option value="1">USA</option>
-                                                            <option value="1">Bangladesh</option>
-                                                            <option value="1">India</option>
-                                                            <option value="1">Pakistan</option>
+                                                        <select class="common-input border" id="Countryyy" name="country">
+                                                            <option value="">Select Country</option>
+                                                            <option value="USA" {{ old('country', $user->country) == 'USA' ? 'selected' : '' }}>USA</option>
+                                                            <option value="Bangladesh" {{ old('country', $user->country) == 'Bangladesh' ? 'selected' : '' }}>Bangladesh</option>
+                                                            <option value="India" {{ old('country', $user->country) == 'India' ? 'selected' : '' }}>India</option>
+                                                            <option value="Pakistan" {{ old('country', $user->country) == 'Pakistan' ? 'selected' : '' }}>Pakistan</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="col-sm-12">
-                                                <button class="btn btn-main btn-lg"> Update
-                                                    Profile</button>
+                                                <div class="form_box">
+                                                    <label for="address"
+                                                        class="form-label mb-2 font-18 font-heading fw-600">Address</label>
+                                                    <input type="text" class="common-input border" id="address" name="address"
+                                                        value="{{ old('address', $user->address ?? '') }}" placeholder="Address">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <button class="btn btn-main btn-lg"> Update Profile</button>
                                             </div>
                                         </div>
                                     </form>
