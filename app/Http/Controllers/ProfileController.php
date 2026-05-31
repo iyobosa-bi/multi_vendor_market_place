@@ -6,7 +6,6 @@ use App\Http\Requests\Frontend\PasswordUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Service\NotificationService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
@@ -45,7 +44,6 @@ class ProfileController extends Controller
 
         return back();
     }
-
 
     public function updatePassword(PasswordUpdateRequest $request){
 

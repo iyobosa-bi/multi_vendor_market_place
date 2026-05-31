@@ -62,6 +62,8 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('admin.logout');
+
+    Route::get('/profile',[App\Http\Controllers\Admin\ProfileController::class,'index'])->name('admin.profile');
 });
 
 

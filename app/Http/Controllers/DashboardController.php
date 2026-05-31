@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function index():ContractsView
     {
 
-            $user = auth()->user();
+        $user = auth()->user();
         return view('auth.frontend.dashboard.index',compact('user'));
     }
 }
