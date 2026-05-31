@@ -22,7 +22,7 @@
                  <div class="user-profile">
                      <button class="user-profile__button flex-align">
                          <span class="user-profile__thumb">
-                             <img src="{{ asset('build/assets/frontend/assets/images/thumbs/user-profile.png') }}"
+                          <img src="{{ asset('storage/'.$user->avatar) }}"
                                  class="cover-img" alt="">
                          </span>
                      </button>
@@ -49,7 +49,7 @@
                          </li>
                          <li class="sidebar-list__item">
                              <a href="login.html" class="sidebar-list__link">
-                                
+
                                  <form method="POST" action="{{ route('logout') }}">
                                      @csrf
                                      <a href="{{ route('logout') }}" class="sidebar-list__link"

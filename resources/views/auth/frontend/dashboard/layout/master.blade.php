@@ -9,7 +9,6 @@
     <title> Digital Market Place HTML Template</title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('build/assets/frontend/assets/images/logo/favicon-two.png') }}">
-
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('build/assets/frontend/assets/css/bootstrap.min.css') }}">
     <!-- Fontawesome -->
@@ -18,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('build/assets/frontend/assets/css/slick.css') }}">
     <!-- magnific popup -->
     <link rel="stylesheet" href="{{ asset('build/assets/frontend/assets/css/magnific-popup.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('build/assets/frontend/assets/css/select2.min.css') }}">
     <!-- line awesome -->
     <link rel="stylesheet" href="{{ asset('build/assets/frontend/assets/css/line-awesome.min.css') }}">
     <!-- Tabler Icons CSS -->
@@ -28,6 +29,7 @@
     <link rel="stylesheet" href="{{ asset('build/assets/frontend/assets/css/main.css') }}">
 
 </head>
+
 
 <body>
 
@@ -205,7 +207,6 @@
 
     <!-- main js -->
     <script src="{{ asset('build/assets/frontend/assets/js/main.js') }}"></script>
-
 
 </body>
 

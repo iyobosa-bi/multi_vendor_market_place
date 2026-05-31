@@ -10,11 +10,11 @@
                     <div class="profile-info">
                         <div class="profile-info__inner mb-40 text-center">
 
-                            <div class="avatar-upload mb-24">
+                            <div class="avatar-upload mb-24"  style="background-image: url('{{ asset('storage/' . $user->avatar) }}');">
                                 <div class="avatar-edit">
                                     <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg">
                                     <label for="imageUpload">
-                                        <img src="{{ asset('storage/'.$user->avatar) }}" alt="">
+                                        <img src="{{ asset('storage/' . $user->avatar) }}" alt="">
                                     </label>
                                 </div>
                                 <div class="avatar-preview">
@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                             <h5 class="profile-info__name mb-1">{{ $user->name }}</h5>
-                            <span class="profile-info__designation font-14">Exclusive Author</span>
+                            <span class="profile-info__designation font-14">{{ strtoupper($user->user_type)  }}</span>
                         </div>
 
                         <ul class="profile-info-list">
@@ -67,7 +67,7 @@
                                     <i class="ti ti-calendar-month"></i>
                                     <span class="text text-heading fw-500">Member Since</span>
                                 </span>
-                                <span class="profile-info-list__info">Jan, 01, 2024</span>
+                                <span class="profile-info-list__info">{{ $user->created_at->format('M d, Y') }}</span>
                             </li>
                             <li class="profile-info-list__item">
                                 <span class="profile-info-list__content flx-align flex-nowrap gap-2">
@@ -110,24 +110,30 @@
                                 <div class="tab-pane fade active show" id="pills-personalInfo" role="tabpanel"
                                     aria-labelledby="pills-personalInfo-tab" tabindex="0">
 
-                                    <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                    <form action="{{ route('profile.update') }}" method="POST"
+                                        enctype="multipart/form-data" autocomplete="off">
                                         @csrf
-
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-6">
                                                 <div class="form_box">
                                                     <label for="name"
-                                                        class="form-label mb-2 font-18 font-heading fw-600">Full Name</label>
-                                                    <input type="text" class="common-input border" id="name" name="name"
-                                                        value="{{ old('name', $user->name) }}" placeholder="Full Name">
+                                                        class="form-label mb-2 font-18 font-heading fw-600">Full
+                                                        Name</label>
+                                                    <input type="text" class="common-input border" id="name"
+                                                        name="name" value="{{ old('name', $user->name) }}"
+                                                        placeholder="Full Name">
+                                                   <x-input-error :messages="$errors->first('name')" />
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 col-xs-6">
                                                 <div class="form_box">
                                                     <label for="emailAdddd"
-                                                        class="form-label mb-2 font-18 font-heading fw-600">Email Address</label>
-                                                    <input type="email" class="common-input border" id="emailAdddd" name="email"
-                                                        value="{{ old('email', $user->email) }}" placeholder="Email Address">
+                                                        class="form-label mb-2 font-18 font-heading fw-600">Email
+                                                        Address</label>
+                                                    <input type="email" class="common-input border" id="emailAdddd"
+                                                        name="email" value="{{ old('email', $user->email) }}"
+                                                        placeholder="Email Address">
+                                                        <x-input-error :messages="$errors->first('email')" />
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 col-xs-6">
@@ -135,12 +141,21 @@
                                                     <label for="cityyy"
                                                         class="form-label mb-2 font-18 font-heading fw-600">City</label>
                                                     <div class="select-has-icon">
-                                                        <select class="common-input border" id="cityyy" name="city">
+                                                        <select class="common-input border" id="cityyy"
+                                                            name="city">
                                                             <option value="">Select City</option>
-                                                            <option value="Dhaka" {{ old('city', $user->city) == 'Dhaka' ? 'selected' : '' }}>Dhaka</option>
-                                                            <option value="Chandpur" {{ old('city', $user->city) == 'Chandpur' ? 'selected' : '' }}>Chandpur</option>
-                                                            <option value="Comilla" {{ old('city', $user->city) == 'Comilla' ? 'selected' : '' }}>Comilla</option>
-                                                            <option value="Rangpur" {{ old('city', $user->city) == 'Rangpur' ? 'selected' : '' }}>Rangpur</option>
+                                                            <option value="Dhaka"
+                                                                {{ old('city', $user->city) == 'Dhaka' ? 'selected' : '' }}>
+                                                                Dhaka</option>
+                                                            <option value="Chandpur"
+                                                                {{ old('city', $user->city) == 'Chandpur' ? 'selected' : '' }}>
+                                                                Chandpur</option>
+                                                            <option value="Comilla"
+                                                                {{ old('city', $user->city) == 'Comilla' ? 'selected' : '' }}>
+                                                                Comilla</option>
+                                                            <option value="Rangpur"
+                                                                {{ old('city', $user->city) == 'Rangpur' ? 'selected' : '' }}>
+                                                                Rangpur</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -149,20 +164,23 @@
                                                 <div class="form_box">
                                                     <label for="avatar"
                                                         class="form-label mb-2 font-18 font-heading fw-600">Avatar</label>
-                                                    <input type="file" class="" id="avatar" name="avatar" accept=".png, .jpg, .jpeg">
+                                                    <input type="file" class="" id="avatar" name="avatar"
+                                                        accept=".png, .jpg, .jpeg">
+                                                        <x-input-error :messages="$errors->first('avatar')" />
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 col-xs-6">
                                                 <div class="form_box">
                                                     <label for="Countryyy"
                                                         class="form-label mb-2 font-18 font-heading fw-600">Country</label>
-                                                    <div class="select-has-icon">
-                                                        <select class="common-input border" id="Countryyy" name="country">
-                                                            <option value="">Select Country</option>
-                                                            <option value="USA" {{ old('country', $user->country) == 'USA' ? 'selected' : '' }}>USA</option>
-                                                            <option value="Bangladesh" {{ old('country', $user->country) == 'Bangladesh' ? 'selected' : '' }}>Bangladesh</option>
-                                                            <option value="India" {{ old('country', $user->country) == 'India' ? 'selected' : '' }}>India</option>
-                                                            <option value="Pakistan" {{ old('country', $user->country) == 'Pakistan' ? 'selected' : '' }}>Pakistan</option>
+                                                    <div class="">
+                                                        <select class="common-input border select_2" id="Countryyy"
+                                                            name="country">
+                                                          <option value=""> Select a country</option>
+
+                                                          @foreach(config('options.countries') as $key=>$val)
+                                                                <option value= {{ $val }}  @selected($user->country == $val)>{{ $val }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -171,8 +189,9 @@
                                                 <div class="form_box">
                                                     <label for="address"
                                                         class="form-label mb-2 font-18 font-heading fw-600">Address</label>
-                                                    <input type="text" class="common-input border" id="address" name="address"
-                                                        value="{{ old('address', $user->address ?? '') }}" placeholder="Address">
+                                                    <input type="text" class="common-input border" id="address"
+                                                        name="address" value="{{ old('address', $user->address ?? '') }}"
+                                                        placeholder="Address">
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
@@ -234,28 +253,31 @@
                                 </div>
                                 <div class="tab-pane fade" id="pills-changePassword" role="tabpanel"
                                     aria-labelledby="pills-changePassword-tab" tabindex="0">
-                                    <form action="#" autocomplete="off">
+                                    <form action="{{ route('password.update')}}" autocomplete="off" method="POST">
+                                        @csrf
                                         <div class="row">
-
                                             <div class="col-12">
                                                 <div class="form_box">
                                                     <label for="current-password"
-                                                        class="form-label mb-2 font-18 font-heading fw-600">Current
+                                                        class="form-label mb-2 font-18 font-heading fw-600" name="current-password">Current
                                                         Password</label>
                                                     <div class="position-relative">
                                                         <input type="password"
                                                             class="common-input common-input--withIcon common-input--withLeftIcon "
-                                                            id="current-password" placeholder="************">
+                                                            id="current-password" placeholder="************"
+                                                            name="current_password">
                                                         <span class="input-icon input-icon--left"><img
-                                                                src="assets/images/icons/key-icon.svg"
+                                                                src="{{ asset('build/assets/frontend/assets/images/icons/key-icon.svg')}}"
                                                                 alt=""></span>
                                                         <span
                                                             class="input-icon password-show-hide fas fa-eye la-eye-slash toggle-password-two"
                                                             id="#current-password"></span>
                                                     </div>
+                                                    
                                                 </div>
+                                                
                                             </div>
-
+                                             <x-input-error :messages="$errors->get('current_password')" />
                                             <div class="col-sm-6 col-xs-6">
                                                 <div class="form_box">
                                                     <label for="new-password"
@@ -264,28 +286,31 @@
                                                     <div class="position-relative">
                                                         <input type="password"
                                                             class="common-input common-input--withIcon common-input--withLeftIcon "
-                                                            id="new-password" placeholder="************">
+                                                            id="new-password" 
+                                                            placeholder="************"
+                                                            name="new_password">
                                                         <span class="input-icon input-icon--left"><img
-                                                                src="assets/images/icons/lock-two.svg"
+                                                                src="{{ asset('build/assets/frontend/assets/images/icons/lock-two.svg') }}"
                                                                 alt=""></span>
-                                                        <span
-                                                            class="input-icon password-show-hide fas fa-eye la-eye-slash toggle-password-two"
-                                                            id="#new-password"></span>
+                                        
                                                     </div>
                                                 </div>
+                                                 
                                             </div>
-
+                                            <x-input-error :messages="$errors->get('new_password')" />
                                             <div class="col-sm-6 col-xs-6">
                                                 <div class="form_box">
                                                     <label for="confirm-password"
-                                                        class="form-label mb-2 font-18 font-heading fw-600">Current
+                                                        class="form-label mb-2 font-18 font-heading fw-600">Confirm
                                                         Password</label>
                                                     <div class="position-relative">
                                                         <input type="password"
                                                             class="common-input common-input--withIcon common-input--withLeftIcon "
-                                                            id="confirm-password" placeholder="************">
+                                                            id="confirm-password" ,
+                                                            name="new_password_confirmation"
+                                                            placeholder="************">
                                                         <span class="input-icon input-icon--left"><img
-                                                                src="assets/images/icons/lock-two.svg"
+                                                                src="{{ asset('build/assets/frontend/assets/images/icons/lock-two.svg') }}"
                                                                 alt=""></span>
                                                         <span
                                                             class="input-icon password-show-hide fas fa-eye la-eye-slash toggle-password-two"
@@ -293,6 +318,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                             <x-input-error :messages="$errors->get('new_password_confirmation')" />
 
                                             <div class="col-sm-12">
                                                 <button class="btn btn-main btn-lg"> Update
