@@ -64,6 +64,10 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
         ->name('admin.logout');
 
     Route::get('/profile',[App\Http\Controllers\Admin\ProfileController::class,'index'])->name('admin.profile');
+
+    // Roles Routes
+
+    Route::resource('roles', App\Http\Controllers\Admin\RolesController::class)->names('admin.role');
 });
 
 

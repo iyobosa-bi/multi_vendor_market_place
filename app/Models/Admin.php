@@ -6,12 +6,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;  //  Import this
 use Illuminate\Notifications\Notifiable;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
 
-{       
-    use Notifiable;
+{
+    use Notifiable ,HasRoles;
     protected $table = 'admins';
 
     protected $fillable = [
