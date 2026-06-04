@@ -68,6 +68,8 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
     // Roles Routes
 
     Route::resource('roles', App\Http\Controllers\Admin\RolesController::class)->names('admin.role');
+
+    
 });
 
 

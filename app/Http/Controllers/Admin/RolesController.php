@@ -16,7 +16,8 @@ class RolesController extends Controller
      */
     public function index(): View
     {
-        return view('admin.roles.index');
+        $roles = Role::withCount('permissions')->get();
+        return view('admin.roles.index', compact('roles'));
     }
 
     /**
@@ -34,7 +35,12 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->role_name);
+
+            $request->validate([
+                'role_name' => 'required|string|unique:roles,name',
+                'permissions' => 'required|array',
+                'permissions.*' => 'exists:permissions,name',
+            ]);
         //Create Role
         $role = Role::firstOrCreate(['name' => $request->role_name, 'guard_name' => 'admin']);
 

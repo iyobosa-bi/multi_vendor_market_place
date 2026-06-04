@@ -2,7 +2,6 @@
 
 
 
-
 @section('content')
     <div class="page-wrapper">
         <div class="page-body">
@@ -30,24 +29,33 @@
                     <table class="table table-vcenter card-table table-striped">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Title</th>
-                          <th>Email</th>
                           <th>Role</th>
-                          <th class="w-1"></th>
+                          <th>Permission Count</th>
+                          <th>Permissions</th>
+                          <th class="w-1">Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Maryjo Lebarree</td>
-                          <td class="text-secondary">Civil Engineer, Product Management</td>
-                          <td class="text-secondary"><a href="#" class="text-reset">mlebarree5@unc.edu</a></td>
-                          <td class="text-secondary">User</td>
-                          <td>
-                            <a href="#">Edit</a>
-                          </td>
-                        </tr>
-
+                       @forelse ($roles as $role)
+                            <tr>
+                                <td>{{ $role->name }}</td>
+                                <td>{{ $role->permissions_count }}</td>
+                                <td>
+                                    @foreach($role->permissions as $permission)
+                                        <span class="badge bg-primary text-white">{{ $permission->name }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    <a href="" class="btn btn-outline-primary btn-2">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center">No roles found.</td>
+                            </tr>
+                        @endforelse
                       </tbody>
                     </table>
                   </div>

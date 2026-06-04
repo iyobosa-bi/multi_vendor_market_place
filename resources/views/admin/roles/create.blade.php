@@ -43,6 +43,7 @@
                                                         @endforeach
                                                 @endforeach
                                             </div>
+                                             <x-input-error :messages="$errors->first('permissions')" class="mt-2" />
                                         </div>
                                     </div>
                                     <div class="card-footer text-end">
